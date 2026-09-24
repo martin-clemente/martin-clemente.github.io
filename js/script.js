@@ -37,6 +37,7 @@
 
       'hero.eyebrow': 'Final-year Technical Informatics Student',
       'hero.tagline': 'I turn problems into working systems — across software, the web, and the hardware they run on.',
+      'hero.areas': 'Areas of focus',
       'hero.viewProjects': 'View Projects',
       'hero.contactMe': 'Contact Me',
 
@@ -130,6 +131,7 @@
 
       'hero.eyebrow': 'Estudiante de último año de Técnico en Informática',
       'hero.tagline': 'Convierto problemas en sistemas que funcionan — a través del software, la web y el hardware en el que se ejecutan.',
+      'hero.areas': 'Áreas de enfoque',
       'hero.viewProjects': 'Ver proyectos',
       'hero.contactMe': 'Contáctame',
 
@@ -202,9 +204,9 @@
     }
   };
 
-  let currentLang = 'en';
+  let currentLang = 'es';
   try {
-    currentLang = localStorage.getItem('lang') === 'es' ? 'es' : 'en';
+    currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'es';
   } catch (e) {}
 
   const t = (key) => (I18N[currentLang] ? I18N[currentLang][key] : '') || '';
