@@ -27,7 +27,9 @@
       'nav.curriculum': 'Curriculum',
       'nav.open': 'Open menu',
       'nav.close': 'Close menu',
+      'nav.primary': 'Primary',
       'lang.switch': 'Switch language',
+      'lang.menu': 'Language',
       'lang.toEs': 'Switch to Spanish',
       'lang.toEn': 'Switch to English',
       'theme.dark': 'Switch to dark mode',
@@ -53,6 +55,7 @@
 
       'project.airsense.type': 'Collaborative Project',
       'project.airsense.desc': 'An environmental monitoring system built to improve understanding of indoor/outdoor conditions through real-time data collection and visualization. Tracks temperature, humidity, ambient noise and CO₂ using ESP32-based sensors, with a web dashboard for visualization and alerts, plus AI-assisted analysis to support recommendations. AirSense competed at <strong>ACTE 2026</strong> and advanced to a second instance.',
+      'project.airsense.contribution': 'I designed and built the dashboard and the whole website: the data visualization panel with alerts, plus the frontend integrated with the ESP32-based sensor data.',
 
       'contribution.label': 'My contribution',
 
@@ -66,6 +69,7 @@
       'status.inProgress': 'In progress',
 
       'btn.viewRepo': 'View Repository',
+      'btn.visitSite': 'Visit Site',
 
       'skills.heading': 'Skills',
       'skills.software': 'Software & Web',
@@ -85,7 +89,7 @@
       'tag.embedded': 'Embedded Systems',
 
       'education.heading': 'Education',
-      'education.meta1': 'Final-year student · Argentina',
+      'education.meta1': 'Final-year student · E.E.S.T N°1 · 2020 – present',
       'education.meta2': 'Course / Training · 6 academic hours · Hacker Mentor',
 
       'contact.heading': 'Contact',
@@ -116,7 +120,9 @@
       'nav.curriculum': 'Currículum',
       'nav.open': 'Abrir menú',
       'nav.close': 'Cerrar menú',
+      'nav.primary': 'Principal',
       'lang.switch': 'Cambiar idioma',
+      'lang.menu': 'Idioma',
       'lang.toEs': 'Cambiar a español',
       'lang.toEn': 'Cambiar a inglés',
       'theme.dark': 'Cambiar a modo oscuro',
@@ -142,6 +148,7 @@
 
       'project.airsense.type': 'Proyecto colaborativo',
       'project.airsense.desc': 'Sistema de monitoreo ambiental construido para comprender mejor las condiciones interiores/exteriores mediante recolección y visualización de datos en tiempo real. Registra temperatura, humedad, ruido ambiental y CO₂ con sensores basados en ESP32, con un panel web para visualización y alertas, más análisis asistido por IA para respaldar recomendaciones. AirSense compitió en <strong>ACTE 2026</strong> y avanzó a una segunda instancia.',
+      'project.airsense.contribution': 'Diseñé y construí el dashboard y toda la página web: el panel de visualización de datos con alertas, más el frontend integrado con los datos de los sensores basados en ESP32.',
 
       'contribution.label': 'Mi contribución',
 
@@ -155,6 +162,7 @@
       'status.inProgress': 'En progreso',
 
       'btn.viewRepo': 'Ver repositorio',
+      'btn.visitSite': 'Visitar sitio',
 
       'skills.heading': 'Habilidades',
       'skills.software': 'Software y Web',
@@ -174,7 +182,7 @@
       'tag.embedded': 'Sistemas embebidos',
 
       'education.heading': 'Educación',
-      'education.meta1': 'Estudiante de último año · E.E.S.T N°1',
+      'education.meta1': 'Estudiante de último año · E.E.S.T N°1 · 2020 – presente',
       'education.meta2': 'Curso / Formación · 6 horas académicas · Hacker Mentor',
 
       'contact.heading': 'Contacto',
@@ -284,15 +292,6 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Project screenshots: until real images are added (see TODOs in index.html),
-  // treat a failed <img> load as "no screenshot yet" and fall back to a clean
-  // placeholder instead of a broken-image icon. Carousel slides are excluded.
-  document.querySelectorAll('.project-media-link img').forEach((img) => {
-    img.addEventListener('error', () => {
-      img.closest('.project-media').classList.add('project-media-pending');
-    }, { once: true });
-  });
-
   // Mobile menu toggle.
   if (navToggle && primaryNav) {
     navToggle.addEventListener('click', () => {
@@ -325,6 +324,7 @@
     const dotsWrap = carousel.querySelector('[data-carousel-dots]');
     let index = 0;
     let timer = null;
+    let inView = true;
 
     function show(i) {
       index = (i + slides.length) % slides.length;
@@ -341,16 +341,32 @@
 
     function start() {
       stop();
-      if (!prefersReducedMotion && slides.length > 1) {
+      if (!prefersReducedMotion && slides.length > 1 && inView) {
         timer = setInterval(() => show(index + 1), 4000);
       }
     }
+
+    // Don't keep animating carousels that are off-screen or in a hidden tab.
+    if ('IntersectionObserver' in window) {
+      const inViewObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          inView = entry.isIntersecting;
+          if (inView) start(); else stop();
+        });
+      }, { threshold: 0.15 });
+      inViewObserver.observe(carousel);
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (inView) start();
+    });
 
     slides.forEach((_, di) => {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'carousel-dot';
       dot.setAttribute('data-index', String(di));
+      dot.setAttribute('data-carousel-dot', '');
       dot.setAttribute('aria-label', t('carousel.goto').replace('{n}', String(di + 1)));
       dot.addEventListener('click', () => { show(di); start(); });
       dotsWrap.appendChild(dot);
@@ -443,4 +459,26 @@
   updateThemeToggleState();
 
   applyLanguage(currentLang);
+
+  // ---------- Scroll reveal ----------
+  // Subtle opacity/translateY entrance for major blocks (about, project
+  // showcases, skill groups, education items, contact) as they enter the
+  // viewport. Skipped entirely when the user prefers reduced motion.
+  const revealTargets = document.querySelectorAll('.reveal');
+  if (revealTargets.length) {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealTargets.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+      revealTargets.forEach((el) => revealObserver.observe(el));
+    }
+  }
 })();

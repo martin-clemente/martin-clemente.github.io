@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 · Martín Clemente</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/assets/icons/MC%20Favicon.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    (function () {
+      var theme = 'dark';
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        theme = t;
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">Martín Clemente</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="container hero-inner">
+      <p class="hero-eyebrow">404</p>
+      <h1 class="hero-name">Página no encontrada</h1>
+      <p class="hero-tagline">Esta página no existe o se movió. Andá de vuelta al inicio para seguir explorando mis proyectos.</p>
+      <div class="hero-actions">
+        <a href="/" class="btn btn-primary">Volver al inicio</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
