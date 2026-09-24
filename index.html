@@ -19,29 +19,26 @@
   <meta name="twitter:description" data-i18n-content="meta.description" content="Final-year Technical Informatics student building projects across software, web development, IoT and hardware.">
 
   <link rel="canonical" href="https://martin-clemente.github.io/">
-  <meta name="theme-color" content="#0C1015">
+  <meta name="theme-color" content="#000000">
 
-  <!-- TODO: Replace with real favicon files in assets/icons -->
-  <link rel="icon" href="data:,">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/icons/MC%20Favicon.png">
 
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Set theme before first paint to avoid a flash of the wrong mode -->
   <script>
     (function () {
+      var theme = 'dark';
       try {
         var t = localStorage.getItem('theme');
         if (t !== 'light' && t !== 'dark') {
           t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
+        theme = t;
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', theme);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = theme === 'light' ? '#F5F5F7' : '#000000';
     })();
   </script>
 </head>
@@ -59,13 +56,12 @@
           <a href="#projects" data-i18n="nav.projects">Projects</a>
           <a href="#skills" data-i18n="nav.skills">Skills</a>
           <a href="#education" data-i18n="nav.education">Education</a>
-          <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a>
+          <a href="pdf/Martin%20Clemente%20CV.pdf" target="_blank" rel="noopener" class="nav-cta" data-i18n="nav.curriculum">Curriculum</a>
         </nav>
 
         <div class="header-actions">
           <div class="lang-dropdown" id="lang-dropdown">
             <button type="button" class="lang-toggle" id="lang-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="Switch language">
-              <span class="lang-flag" id="lang-flag" aria-hidden="true">🇦🇷</span>
               <span class="flag-text" id="lang-name">Español</span>
               <svg class="arrow-language" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
@@ -74,12 +70,10 @@
 
             <div class="lang-menu" id="lang-menu" role="menu" aria-label="Language">
               <button type="button" class="lang-option" data-lang-option="es" role="menuitemradio" aria-checked="false">
-                <span class="lang-flag" aria-hidden="true">🇦🇷</span>
                 <span class="flag-text">Español</span>
                 <svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
               </button>
               <button type="button" class="lang-option" data-lang-option="en" role="menuitemradio" aria-checked="true">
-                <span class="lang-flag" aria-hidden="true">🇺🇸</span>
                 <span class="flag-text">English</span>
                 <svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
               </button>
@@ -129,12 +123,15 @@
 
     <!-- ABOUT -->
     <section class="section" id="about">
-      <div class="container about-grid">
+      <div class="container">
         <h2 class="section-heading" data-i18n="about.heading">About</h2>
-        <div class="about-body">
-          <p data-i18n="about.p1">I'm Martín Clemente, a final-year Technical Informatics student in Argentina, close to finishing my technical secondary education.</p>
-          <p data-i18n="about.p2">I'm interested in building technology that integrates software, hardware, web development and the Internet of Things — turning real problems into working projects by combining programming, electronics, sensors, embedded systems and web technologies.</p>
-          <p data-i18n="about.p3">I'm also starting to build knowledge in cybersecurity and information security.</p>
+        <div class="about-grid">
+          <img class="about-photo" src="assets/images/Me/Me.jpg" alt="Martín Clemente" width="1728" height="1727" loading="lazy">
+          <div class="about-body">
+            <p data-i18n="about.p1">I'm Martín Clemente, a final-year Technical Informatics student in Argentina, close to finishing my technical secondary education.</p>
+            <p data-i18n="about.p2">I'm interested in building technology that integrates software, hardware, web development and the Internet of Things — turning real problems into working projects by combining programming, electronics, sensors, embedded systems and web technologies.</p>
+            <p data-i18n="about.p3">I'm also starting to build knowledge in cybersecurity and information security.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -148,13 +145,13 @@
         <article class="project project-featured">
           <div class="carousel project-media" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.airsenseLabel" aria-label="AirSense screenshots">
             <div class="carousel-slides" data-carousel-track>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense1.png" alt="AirSense screenshot 1" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense2.png" alt="AirSense screenshot 2" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense3.png" alt="AirSense screenshot 3" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense4.png" alt="AirSense screenshot 4" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense5.png" alt="AirSense screenshot 5" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense6.png" alt="AirSense screenshot 6" loading="lazy" data-carousel-slide>
-              <img class="carousel-slide" src="assets/images/AirSense/AirSense7.png" alt="AirSense screenshot 7" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-1.png" alt="AirSense screenshot 1" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-2.png" alt="AirSense screenshot 2" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-3.png" alt="AirSense screenshot 3" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-4.png" alt="AirSense screenshot 4" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-5.png" alt="AirSense screenshot 5" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-6.png" alt="AirSense screenshot 6" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/airsense-7.png" alt="AirSense screenshot 7" loading="lazy" data-carousel-slide>
             </div>
 
             <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
@@ -170,10 +167,7 @@
             <span class="project-type" data-i18n="project.airsense.type">Collaborative Project</span>
             <p class="project-desc" data-i18n-html="project.airsense.desc">An environmental monitoring system built to improve understanding of indoor/outdoor conditions through real-time data collection and visualization. Tracks temperature, humidity, ambient noise and CO₂ using ESP32-based sensors, with a web dashboard for visualization and alerts, plus AI-assisted analysis to support recommendations. AirSense competed at <strong>ACTE 2026</strong> and advanced to a second instance.</p>
 
-            <div class="project-contribution">
-              <span class="contribution-label" data-i18n="contribution.label">My contribution</span>
-              <p><!-- TODO: Describe exact responsibilities on AirSense (e.g. firmware, dashboard, sensor integration, data pipeline) --></p>
-            </div>
+            <!-- TODO: Describe exact responsibilities on AirSense (e.g. firmware, dashboard, sensor integration, data pipeline) -->
 
             <ul class="tech-tags">
               <li>ESP32</li><li>IoT</li><li data-i18n="tag.sensors">Sensors</li><li>Web</li><li data-i18n="tag.data">Data</li><li data-i18n="tag.ai">AI</li>
@@ -192,14 +186,14 @@
           <article class="project project-card">
             <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.wrc26Label" aria-label="WRC26 screenshots">
               <div class="carousel-slides" data-carousel-track>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-login.png" alt="WRC26 login screen" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-equipos.png" alt="WRC26 teams screen" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-partidos.png" alt="WRC26 matches screen" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa.png" alt="WRC26 map screen" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa2.png" alt="WRC26 map screen 2" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa3.png" alt="WRC26 map screen 3" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/screenshot%202%20WRC26.png" alt="WRC26 screenshot 2" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/WRC26/screenshot%203%20WRC26.png" alt="WRC26 screenshot 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-1.png" alt="WRC26 login screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-2.png" alt="WRC26 teams screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-3.png" alt="WRC26 matches screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-4.png" alt="WRC26 map screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-5.png" alt="WRC26 map screen 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-6.png" alt="WRC26 map screen 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-7.png" alt="WRC26 screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/wrc26-8.png" alt="WRC26 screenshot 3" loading="lazy" data-carousel-slide>
               </div>
 
               <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
@@ -231,13 +225,13 @@
           <article class="project project-card">
             <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.arcsonLabel" aria-label="Arcson Bridge screenshots">
               <div class="carousel-slides" data-carousel-track>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson1.png" alt="Arcson Bridge screenshot 1" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson2.png" alt="Arcson Bridge screenshot 2" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson3.png" alt="Arcson Bridge screenshot 3" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson4.png" alt="Arcson Bridge screenshot 4" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson6.png" alt="Arcson Bridge screenshot 6" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson7.png" alt="Arcson Bridge screenshot 7" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/BridgeArcson/127.0.0.1-producto.png" alt="Arcson Bridge product page screenshot" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-1.png" alt="Arcson Bridge screenshot 1" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-2.png" alt="Arcson Bridge screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-3.png" alt="Arcson Bridge screenshot 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-4.png" alt="Arcson Bridge screenshot 4" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-5.png" alt="Arcson Bridge screenshot 5" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-6.png" alt="Arcson Bridge screenshot 6" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/arcson-7.png" alt="Arcson Bridge screenshot 7" loading="lazy" data-carousel-slide>
               </div>
 
               <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
@@ -269,12 +263,12 @@
           <article class="project project-card">
             <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.corefixLabel" aria-label="CoreFix screenshots">
               <div class="carousel-slides" data-carousel-track>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing.png" alt="CoreFix landing page screenshot" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing2.png" alt="CoreFix landing page screenshot 2" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing3.png" alt="CoreFix landing page screenshot 3" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing4.png" alt="CoreFix landing page screenshot 4" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing5.png" alt="CoreFix landing page screenshot 5" loading="lazy" data-carousel-slide>
-                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing6.png" alt="CoreFix landing page screenshot 6" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-1.png" alt="CoreFix landing page screenshot" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-2.png" alt="CoreFix landing page screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-3.png" alt="CoreFix landing page screenshot 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-4.png" alt="CoreFix landing page screenshot 4" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-5.png" alt="CoreFix landing page screenshot 5" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-6.png" alt="CoreFix landing page screenshot 6" loading="lazy" data-carousel-slide>
               </div>
 
               <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
@@ -376,13 +370,13 @@
             <span class="contact-label">LinkedIn</span>
             <span class="contact-value">linkedin.com/in/martinclemente</span>
           </a>
-          <a href="mailto:TODO@example.com" class="contact-link">
+          <a href="mailto:martinmiguel.clemente@gmail.com" class="contact-link">
             <span class="contact-label" data-i18n="contact.email">Email</span>
-            <span class="contact-value"><!-- TODO: Add real email address -->TODO@example.com</span>
+            <span class="contact-value">martinmiguel.clemente@gmail.com</span>
           </a>
         </div>
 
-        <a href="mailto:TODO@example.com" class="btn btn-primary contact-cta" data-i18n="contact.cta">Let's connect</a>
+        <a href="mailto:martinmiguel.clemente@gmail.com" class="btn btn-primary contact-cta" data-i18n="contact.cta">Let's connect</a>
       </div>
     </section>
 

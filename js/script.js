@@ -7,7 +7,7 @@
   const navToggle = document.getElementById('nav-toggle');
   const primaryNav = document.getElementById('primary-nav');
   const langToggle = document.getElementById('lang-toggle');
-  const langFlag = document.getElementById('lang-flag');
+  
   const langName = document.getElementById('lang-name');
   const langDropdown = document.getElementById('lang-dropdown');
   const themeToggle = document.getElementById('theme-toggle');
@@ -24,6 +24,7 @@
       'nav.skills': 'Skills',
       'nav.education': 'Education',
       'nav.contact': 'Contact',
+      'nav.curriculum': 'Curriculum',
       'nav.open': 'Open menu',
       'nav.close': 'Close menu',
       'lang.switch': 'Switch language',
@@ -112,6 +113,7 @@
       'nav.skills': 'Habilidades',
       'nav.education': 'Educación',
       'nav.contact': 'Contacto',
+      'nav.curriculum': 'Currículum',
       'nav.open': 'Abrir menú',
       'nav.close': 'Cerrar menú',
       'lang.switch': 'Cambiar idioma',
@@ -172,7 +174,7 @@
       'tag.embedded': 'Sistemas embebidos',
 
       'education.heading': 'Educación',
-      'education.meta1': 'Estudiante de último año · Argentina',
+      'education.meta1': 'Estudiante de último año · E.E.S.T N°1',
       'education.meta2': 'Curso / Formación · 6 horas académicas · Hacker Mentor',
 
       'contact.heading': 'Contacto',
@@ -228,7 +230,6 @@
       dot.setAttribute('aria-label', t('carousel.goto').replace('{n}', String(Number(dot.getAttribute('data-index')) + 1)));
     });
 
-    langFlag.textContent = lang === 'es' ? '🇦🇷' : '🇺🇸';
     langName.textContent = lang === 'es' ? 'Español' : 'English';
     document.querySelectorAll('[data-lang-option]').forEach((opt) => {
       const optLang = opt.getAttribute('data-lang-option');
@@ -427,6 +428,8 @@
   function applyTheme(theme) {
     currentTheme = theme;
     document.documentElement.setAttribute('data-theme', theme);
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = theme === 'light' ? '#F5F5F7' : '#000000';
     updateThemeToggleState();
     try { localStorage.setItem('theme', theme); } catch (e) {}
   }
