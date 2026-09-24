@@ -379,14 +379,16 @@
     let dragStartX = 0;
     let dragDelta = 0;
     let dragging = false;
+    let dragPointerId = null;
 
     function endDrag(commit) {
+      dragPointerId = null;
       if (!dragging) return;
       dragging = false;
       track.classList.remove('dragging');
-      const width = track.clientWidth;
+      const width = track.clientWidth || 0;
       let target = index;
-      if (commit && Math.abs(dragDelta) > width * 0.18) {
+      if (commit && width && Math.abs(dragDelta) > width * 0.18) {
         target = index - Math.round(dragDelta / width);
       }
       show(target);
@@ -394,7 +396,9 @@
     }
 
     track.addEventListener('pointerdown', (event) => {
+      if (dragging) return;
       dragging = true;
+      dragPointerId = event.pointerId;
       dragStartX = event.clientX;
       dragDelta = 0;
       stop();
@@ -403,17 +407,25 @@
     });
 
     track.addEventListener('pointermove', (event) => {
-      if (!dragging) return;
+      if (!dragging || event.pointerId !== dragPointerId) return;
       dragDelta = event.clientX - dragStartX;
       track.style.transform = `translateX(calc(${-index * 100}% + ${dragDelta}px))`;
     });
 
     track.addEventListener('dragstart', (event) => event.preventDefault());
-    track.addEventListener('pointerup', () => endDrag(true));
-    track.addEventListener('pointercancel', () => endDrag(false));
+    track.addEventListener('pointerup', (event) => {
+      if (event.pointerId === dragPointerId) endDrag(true);
+    });
+    track.addEventListener('pointercancel', (event) => {
+      if (event.pointerId === dragPointerId) endDrag(false);
+    });
 
-    carousel.addEventListener('mouseenter', stop);
-    carousel.addEventListener('mouseleave', start);
+    // Hover pause only applies to real mice; on touch, taps leave a synthetic
+    // hover behind that would keep autoplay permanently stopped after a swipe.
+    if (window.matchMedia('(hover: hover)').matches) {
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+    }
     carousel.addEventListener('focusin', stop);
     carousel.addEventListener('focusout', start);
     carousel.addEventListener('keydown', (event) => {
