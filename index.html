@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Martín Clemente | Software, Web &amp; IoT</title>
+  <meta name="description" data-i18n-content="meta.description" content="Final-year Technical Informatics student building projects across software, web development, IoT and hardware.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" data-i18n-content="meta.title" content="Martín Clemente | Software, Web & IoT">
+  <meta property="og:description" data-i18n-content="meta.description" content="Final-year Technical Informatics student building projects across software, web development, IoT and hardware.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://martin-clemente.github.io/">
+  <!-- TODO: Add og:image once a portfolio screenshot/social card is ready -->
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="meta.title" content="Martín Clemente | Software, Web & IoT">
+  <meta name="twitter:description" data-i18n-content="meta.description" content="Final-year Technical Informatics student building projects across software, web development, IoT and hardware.">
+
+  <link rel="canonical" href="https://martin-clemente.github.io/">
+  <meta name="theme-color" content="#0C1015">
+
+  <!-- TODO: Replace with real favicon files in assets/icons -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Set theme before first paint to avoid a flash of the wrong mode -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo">Martín Clemente</a>
+
+      <div class="header-right">
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+          <a href="#about" data-i18n="nav.about">About</a>
+          <a href="#projects" data-i18n="nav.projects">Projects</a>
+          <a href="#skills" data-i18n="nav.skills">Skills</a>
+          <a href="#education" data-i18n="nav.education">Education</a>
+          <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button type="button" class="lang-toggle" id="lang-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="Switch language">
+              <span class="lang-flag" id="lang-flag" aria-hidden="true">🇦🇷</span>
+              <span class="flag-text" id="lang-name">Español</span>
+              <svg class="arrow-language" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+              </svg>
+            </button>
+
+            <div class="lang-menu" id="lang-menu" role="menu" aria-label="Language">
+              <button type="button" class="lang-option" data-lang-option="es" role="menuitemradio" aria-checked="false">
+                <span class="lang-flag" aria-hidden="true">🇦🇷</span>
+                <span class="flag-text">Español</span>
+                <svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+              </button>
+              <button type="button" class="lang-option" data-lang-option="en" role="menuitemradio" aria-checked="true">
+                <span class="lang-flag" aria-hidden="true">🇺🇸</span>
+                <span class="flag-text">English</span>
+                <svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="theme-toggle" id="theme-toggle" title="Switch to light mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zm10-9h3v2h-3v-2zM0 11h3v2H0v-2zm16.95-6.36 1.41-1.42 2.12 2.13-1.41 1.41-2.12-2.12zM3.51 18.24l1.41-1.41 2.13 2.12-1.42 1.42-2.12-2.13zm0-12.48 2.13-2.12 1.41 1.41L4.93 7.17l-1.42-1.41zm14.96 12.48-2.13 2.12-1.41-1.41 2.12-2.13 1.42 1.41z"/></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+          </button>
+
+          <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <p class="hero-eyebrow" data-i18n="hero.eyebrow">Final-year Technical Informatics Student</p>
+        <h1 class="hero-name">Martín Clemente</h1>
+        <p class="hero-tagline" data-i18n="hero.tagline">I turn problems into working systems — across software, the web, and the hardware they run on.</p>
+
+        <ul class="hero-areas" aria-label="Areas of focus">
+          <li>Software</li>
+          <li>Web</li>
+          <li>IoT</li>
+          <li>Hardware</li>
+        </ul>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.viewProjects">View Projects</a>
+          <a href="#contact" class="btn btn-ghost" data-i18n="hero.contactMe">Contact Me</a>
+        </div>
+
+        <div class="hero-links">
+          <a href="https://github.com/martin-clemente" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/martinclemente/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <h2 class="section-heading" data-i18n="about.heading">About</h2>
+        <div class="about-body">
+          <p data-i18n="about.p1">I'm Martín Clemente, a final-year Technical Informatics student in Argentina, close to finishing my technical secondary education.</p>
+          <p data-i18n="about.p2">I'm interested in building technology that integrates software, hardware, web development and the Internet of Things — turning real problems into working projects by combining programming, electronics, sensors, embedded systems and web technologies.</p>
+          <p data-i18n="about.p3">I'm also starting to build knowledge in cybersecurity and information security.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-heading" data-i18n="projects.heading">Projects</h2>
+
+        <!-- Featured: AirSense -->
+        <article class="project project-featured">
+          <div class="carousel project-media" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.airsenseLabel" aria-label="AirSense screenshots">
+            <div class="carousel-slides" data-carousel-track>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense1.png" alt="AirSense screenshot 1" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense2.png" alt="AirSense screenshot 2" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense3.png" alt="AirSense screenshot 3" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense4.png" alt="AirSense screenshot 4" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense5.png" alt="AirSense screenshot 5" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense6.png" alt="AirSense screenshot 6" loading="lazy" data-carousel-slide>
+              <img class="carousel-slide" src="assets/images/AirSense/AirSense7.png" alt="AirSense screenshot 7" loading="lazy" data-carousel-slide>
+            </div>
+
+            <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
+            <button class="carousel-btn carousel-next" type="button" data-carousel-next data-i18n-aria="carousel.next" aria-label="Next screenshot">›</button>
+
+            <div class="carousel-dots" data-carousel-dots></div>
+
+            <a class="carousel-repo-link" href="https://github.com/GustavoEstevez/Sistema_AirSense-" target="_blank" rel="noopener"><span data-i18n="btn.viewRepo">View Repository</span> ↗</a>
+          </div>
+          <div class="project-body">
+            <span class="project-tag project-tag-featured" data-i18n="tag.featured">Featured Project</span>
+            <h3>AirSense</h3>
+            <span class="project-type" data-i18n="project.airsense.type">Collaborative Project</span>
+            <p class="project-desc" data-i18n-html="project.airsense.desc">An environmental monitoring system built to improve understanding of indoor/outdoor conditions through real-time data collection and visualization. Tracks temperature, humidity, ambient noise and CO₂ using ESP32-based sensors, with a web dashboard for visualization and alerts, plus AI-assisted analysis to support recommendations. AirSense competed at <strong>ACTE 2026</strong> and advanced to a second instance.</p>
+
+            <div class="project-contribution">
+              <span class="contribution-label" data-i18n="contribution.label">My contribution</span>
+              <p><!-- TODO: Describe exact responsibilities on AirSense (e.g. firmware, dashboard, sensor integration, data pipeline) --></p>
+            </div>
+
+            <ul class="tech-tags">
+              <li>ESP32</li><li>IoT</li><li data-i18n="tag.sensors">Sensors</li><li>Web</li><li data-i18n="tag.data">Data</li><li data-i18n="tag.ai">AI</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/GustavoEstevez/Sistema_AirSense-" target="_blank" rel="noopener" class="btn btn-small" data-i18n="btn.viewRepo">View Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Grid of other projects -->
+        <div class="project-grid">
+
+          <!-- WRC26 -->
+          <article class="project project-card">
+            <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.wrc26Label" aria-label="WRC26 screenshots">
+              <div class="carousel-slides" data-carousel-track>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-login.png" alt="WRC26 login screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-equipos.png" alt="WRC26 teams screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-partidos.png" alt="WRC26 matches screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa.png" alt="WRC26 map screen" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa2.png" alt="WRC26 map screen 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/127.0.0.1-mapa3.png" alt="WRC26 map screen 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/screenshot%202%20WRC26.png" alt="WRC26 screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/WRC26/screenshot%203%20WRC26.png" alt="WRC26 screenshot 3" loading="lazy" data-carousel-slide>
+              </div>
+
+              <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-btn carousel-next" type="button" data-carousel-next data-i18n-aria="carousel.next" aria-label="Next screenshot">›</button>
+
+              <div class="carousel-dots" data-carousel-dots></div>
+
+              <a class="carousel-repo-link" href="https://github.com/GustavoEstevez/WRC26" target="_blank" rel="noopener"><span data-i18n="btn.viewRepo">View Repository</span> ↗</a>
+            </div>
+            <span class="project-tag" data-i18n="tag.collaborative">Collaborative Project</span>
+            <h3>WRC26</h3>
+            <p class="project-desc" data-i18n="project.wrc26.desc">WRC26 is a ticket management system for the FIFA World Cup 2026 (Canada · Mexico · USA). Built with Django, it lets users browse the 48 teams, group-stage matches and the 16 host stadiums on an interactive Leaflet.js map, buy tickets through a shopping cart and manage their purchases.</p>
+
+            <div class="project-contribution">
+              <span class="contribution-label" data-i18n="contribution.label">My contribution</span>
+              <p data-i18n="project.wrc26.contribution">I was in charge of the frontend: designing and building all the HTML/CSS templates, the interactive stadiums map with Leaflet.js, the JavaScript interactions and client-side form validations, integrated with the Django backend.</p>
+            </div>
+
+            <ul class="tech-tags">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Django</li><li>Leaflet.js</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/GustavoEstevez/WRC26" target="_blank" rel="noopener" class="btn btn-small" data-i18n="btn.viewRepo">View Repository</a>
+            </div>
+          </article>
+
+          <!-- Arcson Bridge -->
+          <article class="project project-card">
+            <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.arcsonLabel" aria-label="Arcson Bridge screenshots">
+              <div class="carousel-slides" data-carousel-track>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson1.png" alt="Arcson Bridge screenshot 1" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson2.png" alt="Arcson Bridge screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson3.png" alt="Arcson Bridge screenshot 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson4.png" alt="Arcson Bridge screenshot 4" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson6.png" alt="Arcson Bridge screenshot 6" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/bridgearcson7.png" alt="Arcson Bridge screenshot 7" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/BridgeArcson/127.0.0.1-producto.png" alt="Arcson Bridge product page screenshot" loading="lazy" data-carousel-slide>
+              </div>
+
+              <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-btn carousel-next" type="button" data-carousel-next data-i18n-aria="carousel.next" aria-label="Next screenshot">›</button>
+
+              <div class="carousel-dots" data-carousel-dots></div>
+
+              <a class="carousel-repo-link" href="https://github.com/martin-clemente/bridge-arcson" target="_blank" rel="noopener"><span data-i18n="btn.viewRepo">View Repository</span> ↗</a>
+            </div>
+            <span class="project-tag" data-i18n="tag.project">Project</span>
+            <h3>Arcson Bridge</h3>
+            <p class="project-desc" data-i18n="project.arcson.desc">Bridge Arcson's institutional website, built with Django. The design follows the company's brand manual (color palette, Montserrat / Open Sans typography) and presents the whole product story — ArcBridge One IoT — through home, product, company and contact pages with a form.</p>
+
+            <div class="project-contribution">
+              <span class="contribution-label" data-i18n="contribution.label">My contribution</span>
+              <p data-i18n="project.arcson.contribution">I designed and built the whole site: the visual identity applied from the brand manual, the frontend of every page and the Django integration, with all institutional text centralized in a single content file for easy editing.</p>
+            </div>
+
+            <ul class="tech-tags">
+              <li>Python</li><li>Django</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/martin-clemente/bridge-arcson" target="_blank" rel="noopener" class="btn btn-small" data-i18n="btn.viewRepo">View Repository</a>
+            </div>
+          </article>
+
+          <!-- CoreFix -->
+          <article class="project project-card">
+            <div class="carousel project-media project-media-card" data-carousel aria-roledescription="carousel" data-i18n-aria="carousel.corefixLabel" aria-label="CoreFix screenshots">
+              <div class="carousel-slides" data-carousel-track>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing.png" alt="CoreFix landing page screenshot" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing2.png" alt="CoreFix landing page screenshot 2" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing3.png" alt="CoreFix landing page screenshot 3" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing4.png" alt="CoreFix landing page screenshot 4" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing5.png" alt="CoreFix landing page screenshot 5" loading="lazy" data-carousel-slide>
+                <img class="carousel-slide" src="assets/images/CoreFix/corefix-pc.github.io-landing6.png" alt="CoreFix landing page screenshot 6" loading="lazy" data-carousel-slide>
+              </div>
+
+              <button class="carousel-btn carousel-prev" type="button" data-carousel-prev data-i18n-aria="carousel.prev" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-btn carousel-next" type="button" data-carousel-next data-i18n-aria="carousel.next" aria-label="Next screenshot">›</button>
+
+              <div class="carousel-dots" data-carousel-dots></div>
+            </div>
+            <span class="project-tag" data-i18n="tag.independent">Independent Initiative</span>
+            <h3>CoreFix</h3>
+            <p class="project-desc" data-i18n="project.corefix.desc">A technical service I'm building alongside my studies, focused on diagnostics, maintenance and optimization for PCs, notebooks and other tech equipment — including its identity, web presence and support processes.</p>
+
+            <div class="project-contribution">
+              <span class="contribution-label" data-i18n="contribution.label">My contribution</span>
+              <p data-i18n="project.corefix.contribution">Designed and built the CoreFix identity and website, and I'm setting up its documentation, processes and infrastructure.</p>
+            </div>
+
+            <ul class="tech-tags">
+              <li>Web</li><li data-i18n="tag.hwService">Hardware Service</li><li data-i18n="tag.branding">Branding</li>
+            </ul>
+
+            <div class="project-links">
+              <!-- TODO: Add CoreFix live site / repository link -->
+              <span class="project-status" data-i18n="status.inProgress">In progress</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-heading" data-i18n="skills.heading">Skills</h2>
+
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3 data-i18n="skills.software">Software &amp; Web</h3>
+            <ul class="tech-tags">
+              <li>Python</li><li>Django</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>SQL</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 data-i18n="skills.hardware">Hardware &amp; IoT</h3>
+            <ul class="tech-tags">
+              <li>ESP32</li><li>Arduino</li><li data-i18n="tag.sensors">Sensors</li><li>IoT</li><li data-i18n="tag.hwTroubleshooting">Hardware troubleshooting</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 data-i18n="skills.tools">Tools</h3>
+            <ul class="tech-tags">
+              <li>Git</li><li>GitHub</li><li>VS Code</li>
+            </ul>
+          </div>
+
+          <div class="skill-group skill-group-learning">
+            <h3 data-i18n="skills.learning">Learning &amp; Areas of Interest</h3>
+            <ul class="tech-tags tech-tags-learning">
+              <li data-i18n="tag.cybersecurity">Cybersecurity</li><li data-i18n="tag.infoSecurity">Information Security</li><li data-i18n="tag.aiFull">Artificial Intelligence</li><li data-i18n="tag.embedded">Embedded Systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section" id="education">
+      <div class="container education-grid">
+        <h2 class="section-heading" data-i18n="education.heading">Education</h2>
+
+        <div>
+          <article class="edu-item">
+            <h3>Técnico en Informática Personal y Profesional</h3>
+            <p class="edu-meta" data-i18n="education.meta1">Final-year student · Argentina <!-- TODO: Add institution name and exact dates --></p>
+          </article>
+
+          <article class="edu-item">
+            <h3>ISO 27001 — "El mapa exacto para Certificarte"</h3>
+            <p class="edu-meta" data-i18n="education.meta2">Course / Training · 6 academic hours · Hacker Mentor</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section-contact" id="contact">
+      <div class="container">
+        <h2 class="section-heading" data-i18n="contact.heading">Contact</h2>
+        <p class="contact-lead" data-i18n="contact.lead">Open to junior/trainee opportunities, internships, collaborative projects and networking with people building interesting things.</p>
+
+        <div class="contact-links">
+          <a href="https://github.com/martin-clemente" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/martin-clemente</span>
+          </a>
+          <a href="https://www.linkedin.com/in/martinclemente/" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/martinclemente</span>
+          </a>
+          <a href="mailto:TODO@example.com" class="contact-link">
+            <span class="contact-label" data-i18n="contact.email">Email</span>
+            <span class="contact-value"><!-- TODO: Add real email address -->TODO@example.com</span>
+          </a>
+        </div>
+
+        <a href="mailto:TODO@example.com" class="btn btn-primary contact-cta" data-i18n="contact.cta">Let's connect</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Martín Clemente — Buenos Aires, Argentina</p>
+      <p class="footer-meta" data-i18n="footer.built">Built with HTML, CSS &amp; JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
